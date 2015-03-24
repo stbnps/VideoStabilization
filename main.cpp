@@ -38,7 +38,7 @@ double resizeFactor = 0.25; // Resize the input frames by this factor
 
 double descriptorDistanceThreshold = 7.0; // Good matches are below "descriptorDistanceThreshold" times the minimum distance
 
-const double correctionAmount = 0.8; // Set between 0 and 1: The higher the smoother the footage will be
+const double correctionAmount = 0.8; // Set it between 0 and 1: The higher the smoother the footage will be
 
 const float akazeThreshold = 4e-4; // The higher the less features it will track
 
@@ -158,7 +158,7 @@ int main() {
 			continue;
 		}
 
-		// Kalman filter loop: predict and detect
+		// Kalman filter loop: predict and correct
 		cv::Mat predicted = kf.predict();
 		cv::Mat HEstimated = kf.correct(H.reshape(1, 9).rowRange(0, 8));
 		HEstimated.push_back(cv::Mat(1, 1, CV_64F, cv::Scalar(1)));

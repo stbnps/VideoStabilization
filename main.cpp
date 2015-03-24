@@ -1,4 +1,3 @@
-
 //	Copyright (c) 2015, Esteban Pardo Sánchez
 //	All rights reserved.
 //
@@ -26,7 +25,6 @@
 //	ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 //	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 //	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 
 #include "opencv2/opencv.hpp"
 #include "opencv2/highgui.hpp"
@@ -192,16 +190,19 @@ int main() {
 
 		previousH = HCorrection.clone();
 
-		cv::resize(frameCorrected, frameCorrected,
+		cv::Mat frameVisualization;
+		cv::Mat frameCorrectedVisualization;
+
+		cv::resize(frameCorrected, frameCorrectedVisualization,
 				cv::Size(frameCorrected.cols / (resizeFactor),
 						frameCorrected.rows / (resizeFactor)));
-		cv::resize(frame, frame,
+		cv::resize(frame, frameVisualization,
 				cv::Size(frame.cols / (resizeFactor),
 						frame.rows / (resizeFactor)));
 
-		imshow("Stabilized", frameCorrected);
+		imshow("Stabilized", frameCorrectedVisualization);
 
-		imshow("Input", frame);
+		imshow("Input", frameVisualization);
 
 		int keyCode = cv::waitKey(60);
 		if (keyCode > 0) {
